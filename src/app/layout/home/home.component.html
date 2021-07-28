@@ -1,0 +1,52 @@
+<form [formGroup]="filterForm">
+  <mat-form-field>
+    <mat-label>Search post</mat-label>
+    <input autocomplete="off" formControlName="searchString" matInput />
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-error
+      *ngIf="
+        filterForm.get('searchString')?.invalid &&
+        filterForm.get('searchString')?.touched
+      "
+    >
+      Search value must be at least 3 characters long
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Direction</mat-label>
+    <mat-select formControlName="direction">
+      <mat-option value="ASC">Ascending</mat-option>
+      <mat-option value="DESC">Descending</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<mat-card *ngFor="let hotel of hotelList?.items">
+  <mat-card-header>
+    <mat-card-title>{{ hotel.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque corporis,
+      delectus dolore doloremque ducimus eaque error excepturi hic in itaque
+      mollitia nemo nobis pariatur praesentium quam ratione sint sunt tempore.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      (click)="openDialog(hotel)" color="primary" mat-flat-button>
+      Book this <mat-icon matSuffix>book_online</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-paginator
+  (page)="onPageChange($event)"
+  *ngIf="
+    filterForm.controls.searchString.value.length < 3 &&
+    hotelList?.items?.length
+  "
+  [length]="32"
+  [pageSizeOptions]="[5, 10, 25]"
+  class="mat-elevation-z16"
+></mat-paginator>

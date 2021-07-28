@@ -1,0 +1,32 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="push">
+    <mat-nav-list>
+      <a
+        #routerLinkActiveInstance="routerLinkActive"
+        *ngFor="let route of staticRoutes"
+        [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+        [class.list-item-active]="routerLinkActiveInstance.isActive"
+        [routerLink]="route.path"
+        (click)="drawer.close()"
+        mat-list-item
+        routerLinkActive
+      >
+        <mat-icon mat-list-icon>{{ route.icon }}</mat-icon>
+        <span>{{ route.label }}</span>
+      </a>
+      </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-toolbar class="mat-elevation-z16">
+      <button (click)="drawer.toggle()" mat-icon-button>
+        <mat-icon>lunch_dining</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <span>Hotel Booking</span>
+      <span class="spacer"></span>
+    </mat-toolbar>
+    <div class="router-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

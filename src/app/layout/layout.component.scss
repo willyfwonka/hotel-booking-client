@@ -1,0 +1,51 @@
+:host {
+  mat-drawer-container {
+    width: 100%;
+    height: 100%;
+
+    mat-drawer {
+      min-width: 300px;
+      user-select: none;
+
+      mat-nav-list {
+        h3 {
+          padding: 20px;
+        }
+
+        mat-form-field {
+          width: 100%;
+          text-align: center;
+          font-size: 1.1rem;
+        }
+
+        li {
+          ul {
+            padding: 0;
+
+            mat-icon {
+              padding-left: 1em;
+            }
+          }
+        }
+      }
+    }
+
+    mat-drawer-content {
+      display: flex;
+      flex-direction: column;
+
+      mat-toolbar {
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+        }}
+
+      .router-wrapper {
+        flex: 1;
+        overflow-y: auto;
+      }
+    }
+  }
+}

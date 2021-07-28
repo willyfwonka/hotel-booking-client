@@ -1,0 +1,49 @@
+<form [formGroup]="addReservationForm">
+  <mat-form-field appearance="fill">
+    <mat-label>First name</mat-label>
+    <input matInput formControlName="firstName" required />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Last name</mat-label>
+    <input matInput formControlName="lastName" required
+  /></mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phoneNumber" required />
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>E-mail</mat-label>
+    <input matInput formControlName="email" required />
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-form-field">
+    <mat-label>Check-in date</mat-label>
+    <input matInput formControlName="checkInDate" [matDatepicker]="checkOutDatePicker">
+    <mat-datepicker-toggle matSuffix [for]="checkOutDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #checkOutDatePicker>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-form-field">
+    <mat-label>Check-out date</mat-label>
+    <input matInput formControlName="checkOutDate" [matDatepicker]="checkInDatePicker">
+    <mat-datepicker-toggle matSuffix [for]="checkInDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #checkInDatePicker>
+      <mat-datepicker-actions>
+        <button mat-button matDatepickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Guest count</mat-label>
+    <input matInput type="number" [max]="4" [min]="0" formControlName="guestCount" required
+  /></mat-form-field>
+  <button type="submit" [disabled]="addReservationForm.invalid" (click)="submitReservation()" mat-stroked-button color="primary">Submit Reservation</button>
+</form>
