@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Hotel } from 'src/schema';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -19,6 +19,7 @@ export class AddReservationDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: Hotel,
     private httpClient: HttpClient,
+    private matDialog: MatDialog,
     private matSnackBar: MatSnackBar
   ) {
     this.addReservationForm = new FormGroup({
@@ -46,11 +47,15 @@ export class AddReservationDialogComponent implements OnInit {
         .pipe(
           catchError((err) => {
             console.log(err);
-            this.matSnackBar.open(
-              'There is already a reservation with this email or phone number',
-              'Ok',
-              { duration: 4000 }
-            );
+            if (/conflict/.test(err)) {
+              this.matSnackBar.open(
+                'There is already a reservation with this email or phone number',
+                'Ok',
+                { duration: 4000 }
+              );
+            } else {
+              this.matSnackBar.open(err, 'Ok', { duration: 4000 });
+            }
             return throwError(err);
           })
         )
@@ -58,6 +63,7 @@ export class AddReservationDialogComponent implements OnInit {
           this.matSnackBar.open('Booked successfully', 'Ok', {
             duration: 4000,
           });
+          setTimeout(() => this.matDialog.closeAll(), 1000);
         });
     } else {
       this.matSnackBar.open('Check the form again', 'Ok', { duration: 4000 });
