@@ -17,11 +17,15 @@ import { AddReservationDialogComponent } from './component/add-reservation-dialo
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/service/auth.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [HomeComponent, AddReservationDialogComponent],
+  providers: [AuthService],
   imports: [
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     MatNativeDateModule,
     MatDialogModule,
     CommonModule,

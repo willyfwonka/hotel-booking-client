@@ -1,6 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Hotel, ListHotel } from 'src/schema';
+import { Hotel, ListHotel, User } from 'src/schema';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -12,6 +18,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReservationDialogComponent } from 'src/app/layout/home/component/add-reservation-dialog/add-reservation-dialog.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +26,7 @@ import { AddReservationDialogComponent } from 'src/app/layout/home/component/add
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @Output() itemEvent = new EventEmitter<any>();
   subscription: Subscription;
   hotelList!: ListHotel;
 
@@ -27,12 +35,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     direction: new FormControl('ASC', [Validators.required]),
   });
 
-  constructor(private httpClient: HttpClient, private matDialog: MatDialog) {
+  jwtUser!: User;
+  loading: boolean;
+
+  constructor(
+    private httpClient: HttpClient,
+    private matDialog: MatDialog,
+    private jwtService: JwtHelperService
+  ) {
+    this.loading = true;
     this.subscription = httpClient
       .get<ListHotel>('http://localhost:4000/hotel/list?pageIndex=0&pageSize=5')
       .pipe(shareReplay(1))
       .subscribe((data) => {
+        const tokenExists = localStorage.getItem('token');
+        if (data.items[0]?.reservations && null != tokenExists) {
+          this.jwtUser = jwtService.decodeToken(jwtService.tokenGetter());
+        }
         this.hotelList = data;
+        this.loading = false;
       });
   }
 
@@ -53,22 +74,27 @@ export class HomeComponent implements OnInit, OnDestroy {
         debounceTime(400),
         distinctUntilChanged(),
         switchMap(async ({ searchString, direction }) => {
-          this.subscription = this.httpClient
-            .get<ListHotel>(
-              'http://localhost:4000/hotel/list?direction=' +
-                direction +
-                '&query=' +
-                searchString
-            )
-            .subscribe((data) => {
-              this.hotelList = data;
-            });
+          if (this.filterForm.valid) {
+            this.loading = true;
+            this.subscription = this.httpClient
+              .get<ListHotel>(
+                'http://localhost:4000/hotel/list?direction=' +
+                  direction +
+                  '&query=' +
+                  searchString
+              )
+              .subscribe((data) => {
+                this.hotelList = data;
+                this.loading = false;
+              });
+          }
         })
       )
       .subscribe();
   }
 
   updatePagination({ pageIndex, pageSize }: PageEvent): void {
+    this.loading = true;
     this.subscription = this.httpClient
       .get<ListHotel>(
         'http://localhost:4000/hotel/list?direction=' +
@@ -83,6 +109,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .pipe(shareReplay(1))
       .subscribe((data) => {
         this.hotelList = data;
+        this.loading = false;
       });
   }
 

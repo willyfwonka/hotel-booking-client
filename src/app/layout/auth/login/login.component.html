@@ -1,1 +1,42 @@
-<p>login works!</p>
+<mat-card>
+  <mat-card-header><h1>Login</h1></mat-card-header>
+  <mat-card-subtitle>Fill in the fields to login</mat-card-subtitle>
+  <form [formGroup]="loginForm" autocomplete="off">
+    <input
+      autocomplete="doNotAutoComplete"
+      name="somethingAutofillDoesntKnow"
+      style="display: none"
+      type="text"
+    />
+    <input
+      autocomplete="doNotAutoComplete"
+      name="somethingAutofillDoesntKnow"
+      style="display: none"
+      type="text"
+    />
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input
+        autocomplete="new-username"
+        formControlName="username"
+        matInput
+        required
+        type="search"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input
+        autocomplete="new-password"
+        formControlName="password"
+        matInput
+        required
+        type="password"
+      />
+    </mat-form-field>
+    <div>
+      <button [disabled]="loginForm.invalid" (click)="submitLogin()" mat-stroked-button type="submit">Login<mat-icon>fingerprint</mat-icon></button>
+      <a routerLink="../register" mat-stroked-button>Register<mat-icon>create</mat-icon></a>
+    </div>
+  </form>
+</mat-card>

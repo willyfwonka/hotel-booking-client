@@ -1,16 +1,14 @@
 :host {
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
   mat-form-field {
     font-size: 1.1em;
     min-width: 15rem;
     margin: 1.1em;
   }
-
-  padding: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 
   mat-card {
     margin-bottom: 2em;

@@ -10,12 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-
+import { AuthService } from 'src/app/service/auth.service';
 
 @NgModule({
-  declarations: [
-    LayoutComponent
-  ],
+  declarations: [LayoutComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,
@@ -27,5 +25,6 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatButtonModule,
   ],
+  providers: [AuthService],
 })
-export class LayoutModule { }
+export class LayoutModule {}

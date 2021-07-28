@@ -1,1 +1,26 @@
-<p>register works!</p>
+<mat-card>
+  <mat-card-header>
+    <h1>Register</h1>
+  </mat-card-header>
+  <mat-card-subtitle>
+    Fill in the blanks to complete your registration
+  </mat-card-subtitle>
+  <form [formGroup]="registerForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input formControlName="username" matInput />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input type="password" formControlName="password" matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm password</mat-label>
+      <input type="password" formControlName="confirmPassword" matInput />
+    </mat-form-field>
+    <button type="submit" (click)="submitRegistration()" mat-stroked-button [disabled]="registerForm.invalid">
+      Register
+    </button>
+  </form>
+</mat-card>
