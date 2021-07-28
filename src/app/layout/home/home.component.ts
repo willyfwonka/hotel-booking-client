@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Hotel, ListHotel, User } from 'src/schema';
 import {
