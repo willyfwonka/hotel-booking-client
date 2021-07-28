@@ -19,6 +19,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReservationDialogComponent } from 'src/app/layout/home/component/add-reservation-dialog/add-reservation-dialog.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { API_URL } from 'src/app/constant';
 
 @Component({
   selector: 'app-home',
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {
     this.loading = true;
     this.subscription = httpClient
-      .get<ListHotel>('http://localhost:4000/hotel/list?pageIndex=0&pageSize=5')
+      .get<ListHotel>(API_URL + 'hotel/list?pageIndex=0&pageSize=5')
       .pipe(shareReplay(1))
       .subscribe((data) => {
         const tokenExists = localStorage.getItem('token');
@@ -78,7 +79,8 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.loading = true;
             this.subscription = this.httpClient
               .get<ListHotel>(
-                'http://localhost:4000/hotel/list?direction=' +
+                API_URL +
+                  'hotel/list?direction=' +
                   direction +
                   '&query=' +
                   searchString
@@ -97,7 +99,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.subscription = this.httpClient
       .get<ListHotel>(
-        'http://localhost:4000/hotel/list?direction=' +
+        API_URL +
+          'hotel/list?direction=' +
           this.filterForm.get('direction')?.value +
           '&query=' +
           this.filterForm.get('searchString')?.value +

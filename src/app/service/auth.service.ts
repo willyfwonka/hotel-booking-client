@@ -4,6 +4,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { API_URL } from 'src/app/constant';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<{ token: string }> {
     return this.http
-      .post<{ token: string }>('http://localhost:4000/auth/login', {
+      .post<{ token: string }>(API_URL + 'auth/login', {
         username,
         password,
       })
@@ -25,7 +26,7 @@ export class AuthService {
 
   getUser(): Observable<any> {
     return this.httpClient
-      .get<any>('http://localhost:4000/hotel/list?pageIndex=0&pageSize=5')
+      .get<any>(API_URL + 'hotel/list?pageIndex=0&pageSize=5')
       .pipe(
         map((data) => {
           let jwtUser;
@@ -51,7 +52,7 @@ export class AuthService {
   }
 
   register({ username, password, confirmPassword }: any): Observable<any> {
-    return this.httpClient.post('http://localhost:4000/user', {
+    return this.httpClient.post(API_URL + 'user', {
       username,
       password,
       confirmPassword,

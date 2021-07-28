@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { API_URL } from 'src/app/constant';
 
 @Component({
   selector: 'app-add-reservation-dialog',
@@ -41,10 +42,7 @@ export class AddReservationDialogComponent implements OnInit {
   submitReservation(): void {
     if (this.addReservationForm.valid) {
       this.httpClient
-        .post(
-          'http://localhost:4000/reservation',
-          this.addReservationForm.value
-        )
+        .post(API_URL + 'reservation', this.addReservationForm.value)
         .pipe(
           catchError((err) => {
             console.log(err);
