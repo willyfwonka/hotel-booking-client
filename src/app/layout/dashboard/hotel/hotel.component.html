@@ -1,0 +1,55 @@
+<mat-card *ngFor="let reservation of hotel?.reservations">
+  <mat-card-header>
+    <mat-card-title
+    ><span> Client: </span> {{ reservation.firstName }}
+      {{ reservation.lastName }}
+    </mat-card-title>
+    <mat-card-subtitle
+    ><span>Code:</span> {{ reservation.code }}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <div><span>Email:</span> {{ reservation.email }}</div>
+  <mat-divider></mat-divider>
+  <div><span>Phone number:</span> {{ reservation.phoneNumber }}</div>
+  <mat-divider></mat-divider>
+  <div><span>Check-in date:</span> {{ reservation.checkInDate | date }}</div>
+  <mat-divider></mat-divider>
+  <div>
+    <span>Check-out date:</span> {{ reservation.checkOutDate | date }}
+  </div>
+  <mat-divider></mat-divider>
+  <div><span> Guest count: </span> {{ reservation.guestCount }}</div>
+  <mat-divider></mat-divider>
+  <div>
+    <p style="color: #f44336" *ngIf="!reservation.approved">
+      Reservation is not approved
+    </p>
+    <p style="color: #4caf50" *ngIf="reservation.approved">
+      Reservation approved
+    </p>
+  </div>
+  <mat-divider *ngIf="reservation.changedBy"></mat-divider>
+  <div *ngIf="reservation.changedBy">
+    <span>Last change made by:</span> {{ reservation.changedBy.username }}
+  </div>
+  <mat-card-actions>
+    <button
+      *ngIf="!reservation.approved"
+      (click)="submitApprove(reservation.id)"
+      mat-stroked-button
+      color="primary"
+    >
+      Approve reservation
+    </button>
+    <button
+      *ngIf="reservation.approved"
+      (click)="submitUndoApprove(reservation.id)"
+      mat-stroked-button
+      color="warn"
+    >
+      Undo approval
+    </button>
+
+  </mat-card-actions>
+</mat-card>

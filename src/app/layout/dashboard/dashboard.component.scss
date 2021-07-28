@@ -1,0 +1,14 @@
+:host{
+  height: 100%;
+  display: flex;
+
+  mat-drawer-container {
+    min-width: 300px;
+  }
+
+  div {
+    width: 100%;
+    overflow: auto;
+
+  }
+}

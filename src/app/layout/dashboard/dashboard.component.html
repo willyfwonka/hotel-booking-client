@@ -1,1 +1,18 @@
-<p>dashboard works!</p>
+<mat-drawer-container>
+  <mat-nav-list>
+    <a
+      #routerLinkActiveInstance="routerLinkActive"
+      *ngFor="let hotel of hotelList?.items"
+      [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+      [class.list-item-active]="routerLinkActiveInstance.isActive"
+      [routerLink]="hotel?.id"
+      mat-list-item
+      routerLinkActive
+    >
+      <span>{{ hotel?.name }}</span>
+    </a>
+  </mat-nav-list>
+</mat-drawer-container>
+<div>
+  <router-outlet></router-outlet>
+</div>

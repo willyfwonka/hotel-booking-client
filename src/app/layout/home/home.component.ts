@@ -1,10 +1,8 @@
 import {
   Component,
-  EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
-} from '@angular/core';
+  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Hotel, ListHotel, User } from 'src/schema';
 import {
@@ -27,7 +25,6 @@ import { API_URL } from 'src/app/constant';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  @Output() itemEvent = new EventEmitter<any>();
   subscription: Subscription;
   hotelList!: ListHotel;
 

@@ -11,28 +11,28 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$blog-client-primary: mat-palette($mat-amber);
-$blog-client-accent: mat-palette($mat-orange);
+$hotel-booking-primary: mat-palette($mat-amber);
+$hotel-booking-accent: mat-palette($mat-orange);
 
-$blog-client-success: mat-palette($mat-green);
+$hotel-booking-success: mat-palette($mat-green);
 
 // The warn palette is optional (defaults to red).
-$blog-client-warn: mat-palette($mat-red);
+$hotel-booking-warn: mat-palette($mat-red);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$blog-client-theme: mat-dark-theme((
+$hotel-booking-theme: mat-dark-theme((
   color: (
-    primary: $blog-client-primary,
-    accent: $blog-client-accent,
-    warn: $blog-client-warn,
+    primary: $hotel-booking-primary,
+    accent: $hotel-booking-accent,
+    warn: $hotel-booking-warn,
   )
 ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($blog-client-theme);
+@include angular-material-theme($hotel-booking-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -50,10 +50,10 @@ body {
 }
 
 .mat-success {
-  color: mat-color($blog-client-success);
+  color: mat-color($hotel-booking-success);
 }
 
 
 .list-item-active {
-  color: mat-color($blog-client-primary) !important;
+  color: mat-color($hotel-booking-primary) !important;
 }
