@@ -19,7 +19,12 @@
       <mat-label>Confirm password</mat-label>
       <input type="password" formControlName="confirmPassword" matInput />
     </mat-form-field>
-    <button type="submit" (click)="submitRegistration()" mat-stroked-button [disabled]="registerForm.invalid">
+    <button
+      type="submit"
+      (click)="submitRegistration()"
+      mat-stroked-button
+      [disabled]="registerForm.invalid"
+    >
       Register
     </button>
   </form>

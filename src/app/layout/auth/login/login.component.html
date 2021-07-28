@@ -35,8 +35,17 @@
       />
     </mat-form-field>
     <div>
-      <button [disabled]="loginForm.invalid" (click)="submitLogin()" mat-stroked-button type="submit">Login<mat-icon>fingerprint</mat-icon></button>
-      <a routerLink="../register" mat-stroked-button>Register<mat-icon>create</mat-icon></a>
+      <button
+        [disabled]="loginForm.invalid"
+        (click)="submitLogin()"
+        mat-stroked-button
+        type="submit"
+      >
+        Login<mat-icon>fingerprint</mat-icon>
+      </button>
+      <a routerLink="../register" mat-stroked-button
+        >Register<mat-icon>create</mat-icon></a
+      >
     </div>
   </form>
 </mat-card>

@@ -32,21 +32,21 @@
     </mat-card-header>
     <mat-card-content>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque corporis,
-        delectus dolore doloremque ducimus eaque error excepturi hic in itaque
-        mollitia nemo nobis pariatur praesentium quam ratione sint sunt tempore.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+        corporis, delectus dolore doloremque ducimus eaque error excepturi hic
+        in itaque mollitia nemo nobis pariatur praesentium quam ratione sint
+        sunt tempore.
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button
-        (click)="openDialog(hotel)" color="primary" mat-flat-button>
+      <button (click)="openDialog(hotel)" color="primary" mat-flat-button>
         Book this <mat-icon matSuffix>book_online</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>
 </ng-template>
 
-<ng-container *ngIf="loading then stillLoading else loaded"></ng-container>
+<ng-container *ngIf="loading; then stillLoading; else loaded"></ng-container>
 <span class="spacer"></span>
 <mat-paginator
   (page)="onPageChange($event)"

@@ -1,11 +1,11 @@
 <mat-card *ngFor="let reservation of hotel?.reservations">
   <mat-card-header>
     <mat-card-title
-    ><span> Client: </span> {{ reservation.firstName }}
+      ><span> Client: </span> {{ reservation.firstName }}
       {{ reservation.lastName }}
     </mat-card-title>
     <mat-card-subtitle
-    ><span>Code:</span> {{ reservation.code }}
+      ><span>Code:</span> {{ reservation.code }}
     </mat-card-subtitle>
   </mat-card-header>
   <mat-divider></mat-divider>
@@ -15,9 +15,7 @@
   <mat-divider></mat-divider>
   <div><span>Check-in date:</span> {{ reservation.checkInDate | date }}</div>
   <mat-divider></mat-divider>
-  <div>
-    <span>Check-out date:</span> {{ reservation.checkOutDate | date }}
-  </div>
+  <div><span>Check-out date:</span> {{ reservation.checkOutDate | date }}</div>
   <mat-divider></mat-divider>
   <div><span> Guest count: </span> {{ reservation.guestCount }}</div>
   <mat-divider></mat-divider>
@@ -50,6 +48,5 @@
     >
       Undo approval
     </button>
-
   </mat-card-actions>
 </mat-card>
